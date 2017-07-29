@@ -223,7 +223,7 @@ print accuracy_score(outcomes, predictions)
 # Use the `survival_stats` function below to to examine various survival statistics.  
 # **Hint:** To use mulitple filter conditions, put each condition in the list passed as the last argument. Example: `["Sex == 'male'", "Age < 18"]`
 
-# In[87]:
+# In[95]:
 
 # vs.survival_stats(data, outcomes, 'Age', ["Sex == 'male'", "Age < 18"])
 vs.survival_stats(data, outcomes, 'SibSp', ["Sex == 'male'", "Age < 10", "Pclass == 3"])
@@ -234,7 +234,7 @@ vs.survival_stats(data, outcomes, 'SibSp', ["Sex == 'female'", "Age < 60", "Pcla
 # Make sure to keep track of the various features and conditions you tried before arriving at your final prediction model.  
 # **Hint:** You can start your implementation of this function using the prediction code you wrote earlier from `predictions_2`.
 
-# In[88]:
+# In[99]:
 
 def predictions_3(data):
     """ Model with multiple features. Makes a prediction with an accuracy of at least 80%. """
@@ -271,12 +271,22 @@ predictions = predictions_3(data)
 # *Describe the steps you took to implement the final prediction model so that it got an accuracy of at least 80%. What features did you look at? Were certain features more informative than others? Which conditions did you use to split the survival outcomes in the data? How accurate are your predictions?*  
 # **Hint:** Run the code cell below to see the accuracy of your predictions.
 
-# In[89]:
+# In[100]:
 
 print accuracy_score(outcomes, predictions)
 
 
 # **Answer**: 81.26%
+# * Idea: We know that the magarity female did survival but not male.Therefore, we can try to identify the features which female did not survival, and the features which male did survival.
+#     * Female: The objective is finding the features which female **did not** survival.
+#         * **Pclass = 3**: Data shows when Socio-economic class is lower-class. Most Female did not survival
+#         * **Age < 60**: Under the previous condition, data shows that female did survival if thier age is larger than 60, so we look at the age under 60 which female did not survival.
+#         * **Parch > 2**: Under the previous condition, data shows that female did survival if the number of parents and children of the passenger aboard is larger than 2
+#     * Male: The objective is finding the features which female **did** survival.
+#         * **Age < 10**: Base on previous question, we know the male has higher survival rate when the age is under 10. 
+#         * **Pclass = 1 or 2**: Under the previous condition, when looking at the survival rate in Pclass, we found the survival rate of Pclass = 1 and Pclass = 2 is higher.
+#         * **SibSp < 2**: We would like to look deeper when Pclass is 3. We found that the male did survival when the SibSp is less than 2
+#         
 
 # # Conclusion
 # 

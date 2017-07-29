@@ -13218,7 +13218,7 @@ Fill in the missing code below so that the function will make this prediction.<b
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="prompt input_prompt">In&nbsp;[95]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># vs.survival_stats(data, outcomes, &#39;Age&#39;, [&quot;Sex == &#39;male&#39;&quot;, &quot;Age &lt; 18&quot;])</span>
@@ -13995,7 +13995,7 @@ Make sure to keep track of the various features and conditions you tried before 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[88]:</div>
+<div class="prompt input_prompt">In&nbsp;[99]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">predictions_3</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
@@ -14048,7 +14048,7 @@ Make sure to keep track of the various features and conditions you tried before 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[89]:</div>
+<div class="prompt input_prompt">In&nbsp;[100]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
@@ -14079,6 +14079,23 @@ Make sure to keep track of the various features and conditions you tried before 
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer</strong>: 81.26%</p>
+<ul>
+<li>Idea: We know that the magarity female did survival but not male.Therefore, we can try to identify the features which female did not survival, and the features which male did survival.<ul>
+<li>Female: The objective is finding the features which female <strong>did not</strong> survival.<ul>
+<li><strong>Pclass = 3</strong>: Data shows when Socio-economic class is lower-class. Most Female did not survival</li>
+<li><strong>Age &lt; 60</strong>: Under the previous condition, data shows that female did survival if thier age is larger than 60, so we look at the age under 60 which female did not survival.</li>
+<li><strong>Parch &gt; 2</strong>: Under the previous condition, data shows that female did survival if the number of parents and children of the passenger aboard is larger than 2</li>
+</ul>
+</li>
+<li>Male: The objective is finding the features which female <strong>did</strong> survival.<ul>
+<li><strong>Age &lt; 10</strong>: Base on previous question, we know the male has higher survival rate when the age is under 10. </li>
+<li><strong>Pclass = 1 or 2</strong>: Under the previous condition, when looking at the survival rate in Pclass, we found the survival rate of Pclass = 1 and Pclass = 2 is higher.</li>
+<li><strong>SibSp &lt; 2</strong>: We would like to look deeper when Pclass is 3. We found that the male did survival when the SibSp is less than 2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
 </div>
 </div>
